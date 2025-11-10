@@ -54,6 +54,46 @@ vnets = {
     location            = "australiaeast"
     resource_group_name = "rg-rh1"
     address_space       = ["10.0.0.0/16"]
+    subnets = [{
+      name             = "subnet-frontend"
+      address_prefixes = ["10.0.1.0/24"]
+      },
+      {
+        name             = "subnet-backend"
+        address_prefixes = ["10.0.2.0/24"]
+    }]
+} }
+
+pipname = {
+  pip1 = {
+    name                = "pip-front"
+    resource_group_name = "rg-rh1"
+    location            = "australiaeast"
+    allocation_method   = "Static"
+    sku                 = "Standard"
+    tags = {
+      env = "dev"
+    }
   }
+  pip2 = {
+    name                = "pip-back"
+    resource_group_name = "rg-rh1"
+    location            = "australiaeast"
+    allocation_method   = "Static"
+    sku                 = "Standard"
+    tags = {
+      env = "dev"
+    }
   }
-  
+}
+nicname = {
+  nic1 = {
+    name                = "nic-rh1"
+    location            = "australiaeast"
+    resource_group_name = "rg-rh1"
+    ip_configuration = {
+      name                          = "ipconfig-rh1"
+      private_ip_address_allocation = "Dynamic"
+    }
+  }
+}
