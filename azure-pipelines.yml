@@ -6,13 +6,13 @@
 trigger:
 - main
 
-pool: Agent007
+pool: TestAgent
 
 variables:
 - name: WORKDIR
-  value:  
+  value: '$(System.DefaultWorkingDirectory)/environment/dev'
 - name: SERV_CON
-  value:
+  value: service_conn
 
 jobs:
 - job: TerraformInstall
@@ -24,4 +24,25 @@ jobs:
 - job: TerraformInit
   displayName: Terraform Init
   steps:
-    -   
+  - task: TerraformTask@5
+    inputs:
+      provider: 'azurerm'
+      command: 'init'
+      backendServiceArm: 'service_conn'
+      backendAzureRmStorageAccountName: 'rahulbackendstorage'
+      backendAzureRmContainerName: 'blobcontainer'
+      backendAzureRmKey: 'terraform.tfstate'
+  - task: TerraformTask@5
+    inputs:
+      provider: 'azurerm'
+      command: 'plan'
+      workingDirectory: 'WORKDIR'
+      environmentServiceNameAzureRM: 'service_conn'
+  - task: TerraformTask@5
+    inputs:
+      provider: 'azurerm'
+      command: 'apply'
+      workingDirectory: 'WORKDIR'
+      environmentServiceNameAzureRM: 'service_conn'
+
+
