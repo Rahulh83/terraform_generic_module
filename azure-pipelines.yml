@@ -40,5 +40,6 @@ jobs:
       command: 'apply'
       workingDirectory: 'WORKDIR'
       environmentServiceNameAzureRM: 'service_conn'
+      
 
 
