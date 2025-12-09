@@ -6,8 +6,13 @@
 trigger:
 - main
 
-pool: rahul ka agent
+pool: Agent007
 
+variables:
+- name: WORKDIR
+  value:  
+- name: SERV_CON
+  value:
 
 jobs:
 - job: TerraformInstall
@@ -16,11 +21,7 @@ jobs:
     - task: TerraformInstaller@1
       inputs:
         terraformVersion: 'latest'
-    - task: TerraformTask@5
-      inputs:
-        provider: 'azurerm'
-        command: 'init'
-        backendServiceArm: 'Rh-SVC2'
-        backendAzureRmStorageAccountName: 'abc'
-        backendAzureRmContainerName: 'xyz'
-        backendAzureRmKey: 'qwerty'
+- job: TerraformInit
+  displayName: Terraform Init
+  steps:
+    -   
