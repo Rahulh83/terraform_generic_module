@@ -11,12 +11,6 @@ variables:
   value: service_conn
 
 jobs:
-- job: TerraformInstall
-  displayName: terraform install
-  steps:
-    - task: TerraformInstaller@1
-      inputs:
-        terraformVersion: 'latest'
 - job: TerraformInit
   displayName: Terraform Init
   steps:
